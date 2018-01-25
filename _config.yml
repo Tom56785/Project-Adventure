@@ -6,3 +6,7 @@ theme: jekyll-theme-architect
 include: ['_posts']
 baseurl: /Project-Adventure
 url: 'Tom56785.github.io'
+
+github:
+  zip_url: https://github.com/Tom56785/Project-Adventure/archive/master.zip
+  tar_url: https://github.com/Tom56785/Project-Adventure/archive/master.tar.gz

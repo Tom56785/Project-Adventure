@@ -5,7 +5,7 @@ google_analytics:
 theme: jekyll-theme-architect
 include: ['_posts']
 baseurl: /Project-Adventure
-url: 'Tom56785.github.io'
+url: 'tom56785.github.io'
 
 github:
   zip_url: https://github.com/Tom56785/Project-Adventure/archive/master.zip

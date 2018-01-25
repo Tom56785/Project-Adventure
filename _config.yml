@@ -1,6 +1,6 @@
 title: Project Adventure
 description: An adventure game created by Tom Albans
-show_downloads: false
+show_downloads: true
 google_analytics:
 theme: jekyll-theme-architect
 include: ['_posts']

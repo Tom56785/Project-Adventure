@@ -1,4 +1,4 @@
-# Project Adventure, the development blog
+# Project Adventure, a point-and-click adventure game
 
 Website: https://tom56785.github.io/Project-Adventure/
 

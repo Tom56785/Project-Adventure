@@ -1,7 +1,8 @@
 ---
 layout: post
-title: 'A Test Post'
-date: 2018-01-23 09:30:00
+title: 'A New Inventory System'
+date: 2018-02-25 22:30:00
+published: false
 ---
 
 This is a test post!

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# Add any directories, files, or patterns you don't want to be tracked by version control
-_site/
-.sass-cache/
-.jekyll-metadata
-Gemfile*
 build/
 bin/
 obj/
@@ -20,6 +14,3 @@ Release/
 *.layout
 op
 tarot
-=======
-
->>>>>>> d018dc9cd8b0fc277b9ecf9d16d4ea226c5e39ca

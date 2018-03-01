@@ -10,8 +10,8 @@ int main(int argc, char **argv) {
 
     item test(0, 5, "Stick", "Cruelly torn from a tree.");
 
-    cout << test.name() << endl;
-    cout << test.desc() << endl << endl;
+    cout << endl << test.name() << endl;
+    cout << test.desc() << endl;
 
     cout << test.quantity() << endl;
 

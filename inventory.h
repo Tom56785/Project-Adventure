@@ -80,7 +80,7 @@ public:
     bool persistent; // <-- can be changed to true to permanently keep in inventory despite negative quantity
 
     item(int ID, int quant, std::string name, std::string desc, bool pers = false)
-        : _ID(ID), _name(name), _desc(desc)
+        : _ID(ID), _name(name), _desc(desc), persistent(pers)
         // ^^^ Initialising list, vvv extra code for initialisation
     {
         quantity = quant;

@@ -20,6 +20,8 @@ private:
     void* _glyph; // PLACEHOLDER
 
 
+    // having a class to handle the quantity means that there can be code to manage different situations
+    // doing this allows checking on whether the object still exists or not (has a quantity less than or equal to 0), then remove it
     class quantity_class {
     private:
 

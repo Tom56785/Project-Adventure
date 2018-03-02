@@ -4,9 +4,7 @@ title: 'A New Inventory System'
 date: 2018-03-02 19:00:00
 ---
 
-Welcome back!
-
-I have recently just made an inventory system for the game. I wanted to program some part of the game that didn't rely too much on the game engine being finished so I thought I would do the inventory system. This is basically the part of the game that handles what objects have been picked up, how many of that object there are and the name and description of the object. I may need to make some further tweaks to this system but in its current stage it does the job very well.
+Welcome back! I have recently just made an inventory system for the game. I wanted to program some part of the game that didn't rely too much on the game engine being finished so I thought I would do the inventory system. This is basically the part of the game that handles what objects have been picked up, how many of that object there are and the name and description of the object. I may need to make some further tweaks to this system but in its current stage it does the job very well.
 
 In terms of code, this system isn't particularly complicated as there are simply just two different classes. One of them is called 'item' and the other called 'inventory'; these are objects that are created by the game to create the inventory. An 'inventory' object is created and then 'item' objects are created and then inserted into the 'inventory' object.
 
@@ -21,3 +19,8 @@ I have also partially implemented a mechanism that checks whether the quantity o
 Underneath is some of the code that I was using to test this system to give you an idea on how accessing and editing items is using the inventory system.
 
 ![Code for using Inventory](https://{{ site.url }}{{ site.baseurl }}/assets/images/2018-03-02-inventory-system/inventory-proof-of-concept-code.png)
+
+As complicated as it might look, it is actually quite simple to use and the method to simply output text is quite a mouthful so that makes it look even more complicated than it really is. Anyway, stay tuned for further updates!
+
+Thanks for reading :)  
+Tom

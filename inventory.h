@@ -19,73 +19,16 @@ private:
 
     void* _glyph; // PLACEHOLDER
 
-
-    // having a class to handle the quantity means that there can be code to manage different situations
-    // doing this allows checking on whether the object still exists or not (has a quantity less than or equal to 0), then remove it
-    class quantity_class {
-    private:
-
-        int _quantity;
-
-    public:
-
-
-        // using operator overloads to set and retrieve data
-
-        // retrieves quantity of the item
-        // item.quantity();
-        int operator()() {
-            return _quantity;
-        }
-
-        // sets a new quantity for the item
-        // item.quantity = 99;
-        quantity_class& operator=(int quant) {
-            _quantity = quant;
-        }
-
-        // comparison operator, not necessary but useful
-        // item.quantity == 36;
-        bool operator==(int quant) {
-            return (_quantity == quant);
-        }
-
-        // increments quantity by designated amount
-        // item.quantity += 12;
-        quantity_class& operator+=(int quant) {
-            _quantity += quant;
-        }
-
-        // decrements quantity by designated amount
-        // item.quantity -= 12;
-        quantity_class& operator-=(int quant) {
-            _quantity -= quant;
-        }
-
-        // multiplies quantity by designated amount
-        // item.quantity *= 2;
-        quantity_class& operator*=(int quant) {
-            _quantity *= quant;
-        }
-
-        // divides quantity by designated amount
-        // item.quantity /= 3;
-        quantity_class& operator/=(int quant) {
-            _quantity /= quant;
-        }
-
-    };
-
 public:
 
-    quantity_class quantity;
+    int quantity;
     bool persistent; // <-- can be changed to true to permanently keep in inventory despite negative quantity
 
     item(int ID, int quant, std::string name, std::string desc, bool pers = false)
-        : _ID(ID), _name(name), _desc(desc), persistent(pers)
+        : _ID(ID), quantity(quant), _name(name), _desc(desc), persistent(pers)
         // ^^^ Initialising list, vvv extra code for initialisation
     {
-        quantity = quant;
+        
     }
 
     // retrieves the ID of the item, used for searching
@@ -117,10 +60,10 @@ class inv {
 public:
 
     // invoked directly to access items you would need to go through steps
-    // inventory.items[ID].quantity();
+    // inventory.items[ID].quantity;
     // ^^^ this is not desirable
     // vvv IDEAL
-    // inventory[ID].quantity();
+    // inventory[ID].quantity;
     // ^^^ using operator overloads as a solution
 
     // default constructor
@@ -172,7 +115,7 @@ public:
         }
         // loop through every item and check each one's persistency
         for (int i = 0; i < _items.size(); i++) {
-            if (_items[i].quantity() <= 0 && !_items[i].persistent) {
+            if (_items[i].quantity <= 0 && !_items[i].persistent) {
                 // quantity is less than or equal to 0 and isn't persistent, remove it
                 _items.erase(_items.begin() + i);
             }

@@ -6,7 +6,7 @@ using std::string;
 
 
 // contains individual dialogue, the text to display and the character whom says it
-class dialogueClass {
+class DialogueClass {
 public:
 
     int ID;
@@ -22,32 +22,32 @@ public:
 };
 
 // this is a single dialogue option, contains all its data and where it leads to
-class dialogueOption {
+class DialogueOption {
 public:
 
     int ID;
     int leadsTo; // ID of the dialogueScreen this option leads to
 
     string text; // the actual text to show for the option
-    std::vector<dialogueClass> dialogue; // the dialogue between characters for this option
+    std::vector<DialogueClass> dialogue; // the dialogue between characters for this option
 
 };
 
 
 // this holds data for the entire dialogue screen, all the different dialogue options
-class dialogueScreen {
+class DialogueScreen {
 public:
 
     int ID;
 
-    std::vector<dialogueOption> options; // all the options for this screen
+    std::vector<DialogueOption> options; // all the options for this screen
 
 };
 
 
 // a master class which holds all this data together
 // can be instantiated based on characters, etc, as necessary
-class dialogueTree {
+class DialogueTree {
 public:
 
 

@@ -13,9 +13,9 @@ int main(int argc, char **argv) {
 
     */
 
-    inv inventory;
+    Inventory inventory;
 
-    item test(0, 5, "Stick", "Cruelly torn from a tree.");
+    Item test(0, 5, "Stick", "Cruelly torn from a tree.");
 
     cout << endl << test.name() << endl;
     cout << test.desc() << endl;
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 
     */
 
-    std::vector<dialogueOption> cacheOptions; // a cache loosely holding every dialogue option
+    std::vector<DialogueOption> cacheOptions; // a cache loosely holding every dialogue option
     // these options can then be referenced by the dialogue classes rather than copied to save memory
 
     // read the dialogue file(s) to get this data and then place it into the cache
@@ -79,12 +79,12 @@ int main(int argc, char **argv) {
     // TEMPORARILY //
 
     // INITIALISING A SINGLE DIALOGUE OPTION //
-    dialogueOption temp;
+    DialogueOption temp;
     temp.ID = 1;
     temp.leadsTo = 3;
     temp.text = "Hello";
 
-    dialogueClass tempD;
+    DialogueClass tempD;
     tempD.ID = 1;
     tempD.subtitles = "Hello, how are you doing?";
     tempD.time = 4;
@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 
     // output the entire contents of the CACHE
     for (int i = 0; i < cacheOptions.size(); i++) {
-        dialogueOption& opt = cacheOptions[i];
+        DialogueOption& opt = cacheOptions[i];
         cout << "Option ID: " << opt.ID << endl;
         cout << "Option Leads To: " << opt.leadsTo << endl;
         cout << "Option Text: " << opt.text << endl;

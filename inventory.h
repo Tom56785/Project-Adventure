@@ -4,10 +4,10 @@
 
 
 // shouldn't be invoked directly unless for insertion into inventory class
-class item {
+class Item {
 private:
 
-    item(); // <-- PRIVATE constructor
+    Item(); // <-- PRIVATE constructor
             // this means that this constructor MUST be called using the parametized constructor
 
     // having these private is important so that these can only be edited by internal functions and not directly
@@ -24,11 +24,11 @@ public:
     int quantity;
     bool persistent; // <-- can be changed to true to permanently keep in inventory despite negative quantity
 
-    item(int ID, int quant, std::string name, std::string desc, bool pers = false)
+    Item(int ID, int quant, std::string name, std::string desc, bool pers = false)
         : _ID(ID), quantity(quant), _name(name), _desc(desc), persistent(pers)
         // ^^^ Initialising list, vvv extra code for initialisation
     {
-        
+
     }
 
     // retrieves the ID of the item, used for searching
@@ -54,9 +54,9 @@ public:
 
 };
 
-item null(0, 0, "NULL", "NULL");
+Item null(0, 0, "NULL", "NULL");
 
-class inv {
+class Inventory {
 public:
 
     // invoked directly to access items you would need to go through steps
@@ -67,25 +67,25 @@ public:
     // ^^^ using operator overloads as a solution
 
     // default constructor
-    inv() {
+    Inventory() {
 
     }
 
     // OPTIONAL constructor class for creating items from a vector of items
-    inv(std::vector<item> inventory)
-        : _items(inventory)
+    Inventory(std::vector<Item> inv)
+        : _items(inv)
     {
 
     }
 
     // add an item from a pre-made item
-    void add_item(item it) {
+    void add_item(Item it) {
         _items.push_back(it);
     }
 
     // add an item from parameters
     void add_item(int ID, int quant, std::string name, std::string desc, bool pers = false) {
-        _items.push_back(item(ID, quant, name, desc, pers));
+        _items.push_back(Item(ID, quant, name, desc, pers));
     }
 
     // remove an item with it's ID
@@ -125,7 +125,7 @@ public:
 
     // returns a reference to the item using the item's ID
     // needs to be a reference otherwise any changes won't stick
-    item& operator[](int ID) {
+    Item& operator[](int ID) {
         // search for the item in the vector with the ID
         if (!_items.size()) {
             // there are no items in the vector
@@ -149,7 +149,7 @@ private:
 
     // vvv PRIVATE so that it can't be invoked directly
     // this ensures proper function for ID searching
-    std::vector<item> _items;
+    std::vector<Item> _items;
 
 };
 

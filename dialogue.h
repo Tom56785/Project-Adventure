@@ -188,12 +188,6 @@ public:
         } while (start != 0);
         // when the start is set to 0, that means exit the dialogue
 
-
-/*
-        for (int x = 0; x < opt.dialogue.size(); x ++) {
-            cout << opt.dialogue[x].character->name << ": " << opt.dialogue[x].subtitles << endl;
-        }
-*/
     }
 
 };

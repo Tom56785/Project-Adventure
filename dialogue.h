@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -47,6 +48,12 @@ public:
 
     }
 
+    DialogueOption(int id, int lt, std::string txt)
+        : ID(id), leadsTo(lt), text(txt)
+    {
+
+    }
+
     int ID;
     int leadsTo; // ID of the dialogueScreen this option leads to
 
@@ -60,18 +67,21 @@ public:
 class DialogueScreen {
 public:
 
-    DialogueScreen() : ID(0)
+    DialogueScreen() : ID(0), passive(false)
     {
 
     }
 
-    DialogueScreen(int id, std::vector<DialogueOption> opt)
-        : ID(id), options(opt)
+    DialogueScreen(int id, bool p, std::vector<DialogueOption> opt)
+        : ID(id), passive(p), options(opt)
     {
 
     }
 
     int ID;
+    bool passive;
+    // if this option is passive then options aren't shown and goes straight to dialogue
+    // this is useful for when there is dialogue when starting a conversation with a character
 
     std::vector<DialogueOption> options; // all the options for this screen
 
@@ -83,6 +93,107 @@ public:
 class DialogueTree {
 public:
 
+    DialogueTree() : ID(0), root(0)
+    {
 
+    }
+
+    DialogueTree(int id, int r, std::vector<DialogueScreen> scr)
+     : ID(id), root(r), screens(scr)
+    {
+
+    }
+
+    int ID;
+    int root; // which screen to start at when running the dialogue, CAN be altered
+
+    std::vector<DialogueScreen> screens; // all of the dialogue screens for this tree
+
+
+    // this function finds the index of the screen based on its ID
+    int findScreen(int id) {
+        // loop through all the screens until the correct one is found
+        for (int i = 0; i < screens.size(); i++) {
+            if (screens[i].ID == id) {
+                // the correct screen has been found
+                // return the index
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    // this function retrieves input for a choice
+    int getInput() {
+        // WILL BE UPDATED TO TAKE INPUT FROM MOUSE/KEYBOARD, ETC, LATER ON
+
+        std::cout << "\nChoice: ";
+
+        int inp;
+        std::cin >> inp;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(99999, '\n');
+            return 1;
+        }
+        std::cin.ignore(99999, '\n');
+
+        return inp;
+    }
+
+    // function to output dialogue for given option, easy for reuse
+    void outputDialogue(DialogueOption& option) {
+        for (int i = 0; i < option.dialogue.size(); i++) {
+            std::cout << option.dialogue[i].character->name << ": " << option.dialogue[i].subtitles << std:: endl;
+        }
+    }
+
+
+    // function to invoke the dialogue and run it
+    // can return a number based on what happens in the dialogue
+    int run() {
+
+        int start = root; // starting position
+
+        do {
+            // firstly check if the screen is passive
+            // if so then just output the dialogue
+            if (screens[start].passive) {
+                for (int i = 0; i < screens[start].options[0].dialogue.size(); i++) {
+                    std::cout << screens[start].options[0].dialogue[i].character->name << ": " << screens[root].options[0].dialogue[i].subtitles << std:: endl;
+                }
+                start = findScreen(screens[start].options[0].leadsTo);
+            } else {
+
+                // output the starting positions' options
+                for (int i = 0; i < screens[start].options.size(); i++) {
+                    std::cout << (i + 1) << ". " << screens[start].options[i].text << std::endl;
+                }
+
+                // retrieve input and select an option
+                // WILL BE UPDATED TO TAKE INPUT FROM MOUSE/KEYBOARD, ETC, LATER ON
+
+                int choice = getInput();
+
+                // output the dialogue for this option
+                outputDialogue(screens[start].options[choice - 1]);
+
+                // adjust the new starting position
+                start = findScreen(screens[start].options[choice - 1].leadsTo);
+
+            }
+
+            std::cout << std::endl;
+
+        } while (start != 0);
+        // when the start is set to 0, that means exit the dialogue
+
+
+/*
+        for (int x = 0; x < opt.dialogue.size(); x ++) {
+            cout << opt.dialogue[x].character->name << ": " << opt.dialogue[x].subtitles << endl;
+        }
+*/
+    }
 
 };

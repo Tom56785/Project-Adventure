@@ -106,6 +106,13 @@ int main(int argc, char **argv) {
     DialogueClass tempJ(2, &Jane, "I\'m fine. How about you?", 3);
     temp.dialogue.push_back(tempJ);
 
+    temp.dialogue.push_back(DialogueClass(3, &Player, "Pretty good. What brings you here?", 3));
+    temp.dialogue.push_back(DialogueClass(4, &Jane, "I found something in the river.", 3));
+    temp.dialogue.push_back(DialogueClass(5, &Jane, "I wondered if you knew anything about it.", 5));
+    temp.dialogue.push_back(DialogueClass(6, &Player, "Let's have a look.", 3));
+    temp.dialogue.push_back(DialogueClass(7, &Player, "Now that is interesting.", 3));
+    temp.dialogue.push_back(DialogueClass(8, &Jane, "What should we do with it?", 4));
+
     //////////////////
 
     // adding this option to the cache

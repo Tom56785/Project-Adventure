@@ -11,13 +11,19 @@
 class DialogueClass {
 public:
 
-    DialogueClass() : ID(0), time(0)
+    DialogueClass() : ID(0), time(0), breakaway(nullptr)
     {
 
     }
 
     DialogueClass(int id, Character* chr, std::string text, int t)
-        : ID(id), character(chr), subtitles(text), time(t)
+        : ID(id), character(chr), subtitles(text), time(t), breakaway(nullptr)
+    {
+
+    }
+
+    DialogueClass(int id, Character* chr, std::string text, int t, void (*func)())
+        : ID(id), character(chr), subtitles(text), time(t), breakaway(func)
     {
 
     }
@@ -30,6 +36,12 @@ public:
     std::string subtitles; // the text/subtitles for the dialogue to show on screen
 
     int time; // the amount of time to show this dialogue
+
+
+    // FUNCTION POINTER
+    // if this function pointer has a value then instead of displaying dialogue this can be called
+    // this can be useful for editing data partway through dialogue or receiving items
+    void (*breakaway)();
 
 };
 
@@ -144,7 +156,15 @@ public:
     // function to output dialogue for given option, easy for reuse
     void outputDialogue(DialogueOption& option) {
         for (int i = 0; i < option.dialogue.size(); i++) {
-            std::cout << option.dialogue[i].character->name << ": " << option.dialogue[i].subtitles << std:: endl;
+            // check if there is a function breakaway
+            if (option.dialogue[i].breakaway != nullptr) {
+                // the function pointer has been declared so call this function
+                // call this function
+                option.dialogue[i].breakaway();
+            }
+            if (option.dialogue[i].subtitles != "") {
+                std::cout << option.dialogue[i].character->name << ": " << option.dialogue[i].subtitles << std:: endl;
+            }
         }
     }
 
@@ -159,9 +179,7 @@ public:
             // firstly check if the screen is passive
             // if so then just output the dialogue
             if (screens[start].passive) {
-                for (int i = 0; i < screens[start].options[0].dialogue.size(); i++) {
-                    std::cout << screens[start].options[0].dialogue[i].character->name << ": " << screens[root].options[0].dialogue[i].subtitles << std:: endl;
-                }
+                outputDialogue(screens[start].options[0]);
                 start = findScreen(screens[start].options[0].leadsTo);
             } else {
 

@@ -9,6 +9,10 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+void testfunc() {
+    cout << "Hello from test function!" << endl;
+}
+
 int main(int argc, char **argv) {
 
 
@@ -136,7 +140,7 @@ int main(int argc, char **argv) {
     intro_0p.passive = true;
 
     DialogueOption empty(1, 1, "");
-    empty.dialogue.push_back(DialogueClass(1, &Player, "Welcome to Tarot!", 3));
+    empty.dialogue.push_back(DialogueClass(1, &Player, "Welcome to Tarot!", 3, testfunc));
     empty.dialogue.push_back(DialogueClass(2, &Jane, "We hope you have a good stay!", 4));
     intro_0p.options.push_back(empty);
 

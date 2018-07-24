@@ -1,6 +1,7 @@
 #pragma once
 
-#include "main.h"
+#include <string>
+#include <vector>
 
 
 // shouldn't be invoked directly unless for insertion into inventory class

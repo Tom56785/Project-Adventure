@@ -1,4 +1,9 @@
-#include "main.h"
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "dialogue.h"
+#include "inventory.h"
 
 using std::cout;
 using std::endl;
@@ -78,19 +83,28 @@ int main(int argc, char **argv) {
 
     // TEMPORARILY //
 
+    Character Player;
+    Player.ID = 0;
+    Player.name = "John";
+
+    Character Jane(1, "Jane", 0, 0, 255);
+
     // INITIALISING A SINGLE DIALOGUE OPTION //
     DialogueOption temp;
     temp.ID = 1;
     temp.leadsTo = 3;
     temp.text = "Hello";
 
-    DialogueClass tempD;
-    tempD.ID = 1;
-    tempD.subtitles = "Hello, how are you doing?";
-    tempD.time = 4;
-    temp.dialogue.push_back(tempD);
-    tempD.subtitles = "I\'m fine. How about you?";
-    temp.dialogue.push_back(tempD);
+    DialogueClass tempP;
+    tempP.ID = 1;
+    tempP.character = &Player; // this is the player's line
+    tempP.subtitles = "Hello, how are you doing?";
+    tempP.time = 4;
+    temp.dialogue.push_back(tempP);
+
+    // this is Jane's line in response
+    DialogueClass tempJ(2, &Jane, "I\'m fine. How about you?", 3);
+    temp.dialogue.push_back(tempJ);
 
     //////////////////
 
@@ -106,7 +120,7 @@ int main(int argc, char **argv) {
 
         cout << "\nDialogue for this option:\n" << endl;
         for (int x = 0; x < opt.dialogue.size(); x ++) {
-            cout << opt.dialogue[x].subtitles << endl;
+            cout << opt.dialogue[x].character->name << ": " << opt.dialogue[x].subtitles << endl;
         }
     }
     cout << endl;

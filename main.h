@@ -11,3 +11,4 @@ g++ -g -std=c++11 *.h *.cpp -o tarot
 #include <vector>
 
 #include "inventory.h"
+#include "dialogue.h"

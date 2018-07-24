@@ -6,6 +6,13 @@ using std::cin;
 
 int main(int argc, char **argv) {
 
+
+    /*
+
+    INVENTORY TESTING SECTION
+
+    */
+
     inv inventory;
 
     item test(0, 5, "Stick", "Cruelly torn from a tree.");
@@ -55,6 +62,54 @@ int main(int argc, char **argv) {
 
     inventory.update();
     cout << inventory[2].name() << ": " << inventory[2].quantity << endl;
+
+
+    cout << "\n\n DIALOGUE TREE" << endl;
+    /*
+
+    DIALOGUE TREE TESTING SECTION
+
+    */
+
+    std::vector<dialogueOption> cacheOptions; // a cache loosely holding every dialogue option
+    // these options can then be referenced by the dialogue classes rather than copied to save memory
+
+    // read the dialogue file(s) to get this data and then place it into the cache
+
+    // TEMPORARILY //
+
+    // INITIALISING A SINGLE DIALOGUE OPTION //
+    dialogueOption temp;
+    temp.ID = 1;
+    temp.leadsTo = 3;
+    temp.text = "Hello";
+
+    dialogueClass tempD;
+    tempD.ID = 1;
+    tempD.subtitles = "Hello, how are you doing?";
+    tempD.time = 4;
+    temp.dialogue.push_back(tempD);
+    tempD.subtitles = "I\'m fine. How about you?";
+    temp.dialogue.push_back(tempD);
+
+    //////////////////
+
+    // adding this option to the cache
+    cacheOptions.push_back(temp);
+
+    // output the entire contents of the CACHE
+    for (int i = 0; i < cacheOptions.size(); i++) {
+        dialogueOption& opt = cacheOptions[i];
+        cout << "Option ID: " << opt.ID << endl;
+        cout << "Option Leads To: " << opt.leadsTo << endl;
+        cout << "Option Text: " << opt.text << endl;
+
+        cout << "\nDialogue for this option:\n" << endl;
+        for (int x = 0; x < opt.dialogue.size(); x ++) {
+            cout << opt.dialogue[x].subtitles << endl;
+        }
+    }
+    cout << endl;
 
     return 0;
 }

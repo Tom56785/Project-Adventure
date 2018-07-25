@@ -1,7 +1,7 @@
 /*
 Current compilation command for easy reference:
 
-g++ -g -std=c++11 -Ilibs/pugixml libs/pugixml/pugixml.cpp *.h *.cpp -o tarot
+g++ -g -std=c++11 libs/pugixml/pugixml.cpp *.h *.cpp -o tarot
 */
 
 #include <iostream>
@@ -198,22 +198,5 @@ int main(int argc, char **argv) {
         cout << endl;
     }
 
-
-
-/*
-    // output the entire contents of the CACHE
-    for (int i = 0; i < cacheOptions.size(); i++) {
-        DialogueOption& opt = cacheOptions[i];
-        cout << "Option ID: " << opt.ID << endl;
-        cout << "Option Leads To: " << opt.leadsTo << endl;
-        cout << "Option Text: " << opt.text << endl;
-
-        cout << "\nDialogue for this option:\n" << endl;
-        for (int x = 0; x < opt.dialogue.size(); x ++) {
-            cout << opt.dialogue[x].character->name << ": " << opt.dialogue[x].subtitles << endl;
-        }
-    }
-    cout << endl;
-*/
     return 0;
 }

@@ -1,9 +1,17 @@
+/*
+Current compilation command for easy reference:
+
+g++ -g -std=c++11 -Ilibs/pugixml libs/pugixml/pugixml.cpp *.h *.cpp -o tarot
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "dialogue.h"
 #include "inventory.h"
+
+#include "libs/pugixml/pugixml.hpp"
 
 using std::cout;
 using std::endl;
@@ -160,6 +168,35 @@ int main(int argc, char **argv) {
     // RUN the dialogue tree
     intro.run();
 
+
+
+    /*
+
+    PugiXML Testing section
+
+    */
+
+
+    // create the XML document (in memory)
+    pugi::xml_document doc;
+
+    // load the file and save the result
+    pugi::xml_parse_result result = doc.load_file("../cd_catalog.xml");
+
+    cout << "\nXML Loading Result: " << result.description() << endl;
+
+    // load the CD node
+    pugi::xml_node cd = doc.child("CATALOG");
+
+    // display all of its data
+    for (pugi::xml_node c = cd.first_child(); c; c = c.next_sibling()) {
+        cout << "CD:";
+        // display all the child nodes which contain info about the CDs
+        for (pugi::xml_node n = c.first_child(); n; n = n.next_sibling()) {
+            cout << " " << n.name() << ": " << n.text().as_string();
+        }
+        cout << endl;
+    }
 
 
 

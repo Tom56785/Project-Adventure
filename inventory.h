@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TAROT_INVENTORY
+#define TAROT_INVENTORY
 
 #include <string>
 #include <vector>
@@ -153,6 +154,8 @@ private:
     std::vector<Item> _items;
 
 };
+
+#endif
 
 
 /*

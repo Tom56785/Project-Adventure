@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TAROT_DIALOGUE
+#define TAROT_DIALOGUE
 
 #include <iostream>
 #include <string>
@@ -209,3 +210,5 @@ public:
     }
 
 };
+
+#endif

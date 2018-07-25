@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TAROT_CHARACTER
+#define TAROT_CHARACTER
 
 #include <string>
 
@@ -38,3 +39,5 @@ public:
     uint8_t a;
 
 };
+
+#endif

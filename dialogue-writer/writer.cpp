@@ -6,6 +6,12 @@ This program is a helper program for use in writing the XML files
 for the dialogue in the game Tarot. This is much quicker than writing
 them by hand and reduces the amount of human error.
 
+It may not be the most efficient in terms of programming but it doesn't
+need to be. As long as it works it's good enough for me. :)
+
+Compiler command:
+g++ -std=c++11 ../libs/pugixml/pugixml.cpp writer.cpp -o writer
+
 
 MIT License
 
@@ -145,7 +151,6 @@ int main(int argc, char** argv) {
                         dScreen.append_attribute("ID") = ID;
                         dScreen.append_attribute("passive") = bPass;
 
-
                         int o = 0;
                         do {
                             // create DialogueOptions
@@ -175,6 +180,60 @@ int main(int argc, char** argv) {
                                 dOption.append_attribute("ID") = ID;
                                 dOption.append_attribute("leadsTo") = lTo;
                                 dOption.append_attribute("text") = txt.c_str();
+
+                                int x = 0;
+                                do {
+                                    // create DialogueClasses
+                                    clear_screen();
+                                    cout << mainMenu << endl;
+
+                                    cout << "1. Create Dialogue" << endl;
+                                    cout << "2. Go back" << endl;
+
+                                    cout << "\nOption: ";
+                                    x = get_int();
+
+                                    if (x == 1) {
+                                        // create a new DialogueClass
+                                        cout << "\nEnter ID: ";
+                                        ID = get_int();
+
+                                        cout << "Character (ID): ";
+                                        int ch = get_int();
+
+                                        cout << "Enter dialogue: ";
+                                        string dial;
+                                        getline(cin, dial);
+
+                                        cout << "Time (seconds) to show: ";
+                                        float time;
+                                        bool fInp;
+                                        do {
+                                            fInp = false;
+                                            cin >> time;
+                                            if (cin.fail()) {
+                                                cin.clear();
+                                                cin.ignore(INT_MAX, '\n');
+                                                fInp = true;
+                                                cout << "Try again: ";
+                                            }
+                                        } while (fInp);
+                                        cin.ignore();
+
+                                        cout << "Breakaway function ID (0 for none): ";
+                                        int brk = get_int();
+
+                                        // write this data into the current option
+                                        auto dDial = dOption.append_child("DialogueClass");
+                                        dDial.append_attribute("ID") = ID;
+                                        dDial.append_attribute("character") = ch;
+                                        dDial.append_attribute("subtitles") = dial.c_str();
+                                        dDial.append_attribute("time") = time;
+                                        dDial.append_attribute("breakaway") = brk;
+
+                                    }
+
+                                } while (x != 2);
 
                             }
 

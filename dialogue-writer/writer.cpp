@@ -145,6 +145,43 @@ int main(int argc, char** argv) {
                         dScreen.append_attribute("ID") = ID;
                         dScreen.append_attribute("passive") = bPass;
 
+
+                        int o = 0;
+                        do {
+                            // create DialogueOptions
+                            clear_screen();
+                            cout << mainMenu << endl;
+
+                            cout << "1. Create Dialogue Option" << endl;
+                            cout << "2. Go back" << endl;
+
+                            cout << "\nOption: ";
+                            o = get_int();
+
+                            if (o == 1) {
+                                // create a new DialogueOption
+                                cout << "\nEnter ID: ";
+                                ID = get_int();
+
+                                cout << "Leads to (ID of Screen): ";
+                                int lTo = get_int();
+
+                                cout << "Option text: ";
+                                string txt;
+                                getline(cin, txt);
+
+                                // write this data into the current Screen
+                                auto dOption = dScreen.append_child("DialogueOption");
+                                dOption.append_attribute("ID") = ID;
+                                dOption.append_attribute("leadsTo") = lTo;
+                                dOption.append_attribute("text") = txt.c_str();
+
+                            }
+
+
+                        } while (o != 2);
+
+
                     }
 
                 } while (c != 2);

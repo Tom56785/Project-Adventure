@@ -64,9 +64,20 @@ void clear_screen();
 int main(int argc, char** argv) {
 
 
+    const string mainMenu = "XML Tarot Dialogue Writer\nCopyright (c) 2018 Thomas Albans\nLicensed under MIT License, license included with this software\n\n";
+
+    // create the XML document and a Root node
     pugi::xml_document xml;
 
-    char choice = '0';
+    //auto declarationNode = xml.append_child(pugi::node_declaration);
+    //declarationNode.append_attribute("version")    = "1.0";
+    //declarationNode.append_attribute("encoding")   = "ISO-8859-1";
+    //declarationNode.append_attribute("standalone") = "yes";
+
+    auto root = xml.append_child("Tarot");
+
+
+    char choice = 0;
     bool first = true;
 
     do {
@@ -77,9 +88,7 @@ int main(int argc, char** argv) {
             first = false;
         }
 
-        cout << "XML Tarot Dialogue Writer" << endl;
-        cout << "Copyright (c) 2018 Thomas Albans" << endl;
-        cout << "Licensed under MIT License, license included with this software\n\n" << endl;
+        cout << mainMenu << endl;
 
         cout << "1. Create Dialogue Tree" << endl;
         cout << "2. Save XML file" << endl;
@@ -90,18 +99,66 @@ int main(int argc, char** argv) {
         cin.ignore();
 
         switch (choice) {
-        case '1':
+        case '1': {
 
-            cout << "\nEnter ID: ";
-            get_int();
+                cout << "\nEnter ID: ";
+                int ID = get_int();
+                cout << "Enter root ID: ";
+                int rt = get_int();
 
-            break;
-        case '2':
-            cout << "Enter filename: ";
-            string name;
-            getline(cin, name);
-            xml.save_file(name.c_str());
-            break;
+                // create the DialogueTree
+                auto dTree = root.append_child("DialogueTree");
+                dTree.append_attribute("ID") = ID;
+                dTree.append_attribute("root") = rt;
+
+                int c = 0;
+                do {
+
+                    // create the Dialogue Screens
+                    clear_screen();
+                    cout << mainMenu << endl;
+
+                    cout << "1. Create Dialogue Screen" << endl;
+                    cout << "2. Go back" << endl;
+
+                    cout << "\nOption: ";
+                    c = get_int();
+
+                    if (c == 1) {
+                        // create a new DialogueScreen
+                        cout << "\nEnter ID: ";
+                        ID = get_int();
+
+                        char pass = 0;
+                        while (pass != 'y' && pass != 'Y' && pass != 'n' && pass != 'N') {
+                            cout << "Passive (y or n): ";
+                            cin >> pass;
+                            cin.ignore();
+                        }
+                        bool bPass = false;
+                        if (pass == 'y' || pass == 'Y') {
+                            bPass = true;
+                        }
+
+                        // write this data to the current Tree
+                        auto dScreen = dTree.append_child("DialogueScreen");
+                        dScreen.append_attribute("ID") = ID;
+                        dScreen.append_attribute("passive") = bPass;
+
+                    }
+
+                } while (c != 2);
+
+
+                break;
+            }
+        case '2': {
+                cout << "Enter filename: ";
+                string name;
+                getline(cin, name);
+                xml.save_file(name.c_str());
+                break;
+            }
         }
 
 
